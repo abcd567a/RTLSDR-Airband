@@ -5,6 +5,74 @@
 ![main](https://github.com/rtl-airband/RTLSDR-Airband/actions/workflows/build_docker_containers.yml/badge.svg?branch=main)
 ![main](https://github.com/rtl-airband/RTLSDR-Airband/actions/workflows/code_formatting.yml/badge.svg?branch=main)
 
+
+## Added support for building & installing debian package
+### STEP-1:
+**Install build dependencies** </br>
+```
+sudo apt install \
+ debhelper \
+ cmake \
+ build-essential \
+ libusb-1.0-0-dev \
+ librtlsdr-dev \
+ libconfig-dev \
+ libconfig++-dev \
+ libmp3lame-dev \
+ libshout-dev \
+ libfftw3-dev
+```
+
+### STEP-2:
+**Clone source-code** </br>
+```
+git clone https://github.com/abcd567a/RTLSDR-Airband.git 
+
+```
+### STEP-3:
+**Build and install the .deb package** </br>
+```
+cd RTLSDR-Airband 
+
+sudo dpkg-buildpackage -us -uc -b --no-sign  
+
+cd ../
+
+sudo dpkg -i rtl-airband_*.deb
+
+## Above command will give message that dependencies are missing,
+## and sbort without finishing installation.
+
+## Issue following command which will install missing dependencies,
+## and complete the installation.
+
+sudo apt --fix-broken install
+
+```
+
+</br>
+
+**Config files are installed in folder `/etc/airband/`** 
+
+**Systemd commands:** </br>
+
+```
+sudo systemctl status rtl-airband  
+
+sudo systemctl restart rtl-airband  
+
+sudo systemctl stop rtl-airband  
+```
+
+</br>
+
+
+</br>
+
+===========================================
+
+</br>
+
 Changes as of v5.1.0:
  - License is now GPLv2 [#503](https://github.com/rtl-airband/RTLSDR-Airband/discussions/503)
 

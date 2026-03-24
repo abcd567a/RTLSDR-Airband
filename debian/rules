@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release
+
+override_dh_auto_install:
+	dh_auto_install
+	# Rename installed binary to rtl-airband
+	mv debian/rtl-airband/usr/bin/rtl_airband debian/rtl-airband/usr/bin/rtl-airband
+	# Install config file (auto-creates directories)
+	install -D -m 644 debian/rtl-airband.conf \
+	   debian/rtl-airband/etc/airband/rtl-airband.conf
