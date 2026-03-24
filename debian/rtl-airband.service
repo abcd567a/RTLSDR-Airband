@@ -1,0 +1,19 @@
+#/usr/lib/systemd/system/rtl-airband.service
+[Unit]
+Description=RTL Airband Receiver
+After=network.target sound.target
+
+[Service]
+User=airband
+Type=simple
+RuntimeDirectory=rtl-airband
+RuntimeDirectoryMode=0755
+ExecStart=/usr/bin/rtl-airband -F -c /etc/airband/rtl-airband.conf
+SyslogIdentifier=rtl-airband
+Restart=on-failure
+RestartSec=30
+RestartPreventExitStatus=64
+Nice=-5
+
+[Install]
+WantedBy=multi-user.target

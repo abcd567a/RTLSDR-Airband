@@ -1,0 +1,13 @@
+Source: rtl-airband
+Section: utils
+Priority: optional
+Maintainer: abcd567a <abcd567a@users.noreply.github.com> 
+Build-Depends: debhelper (>= 12), cmake, build-essential, libusb-1.0-0-dev, librtlsdr-dev, libconfig-dev, libconfig++-dev, libmp3lame-dev, libshout-dev, libfftw3-dev
+Standards-Version: 4.6.0
+Homepage: https://github.com/abcd567a/RTLSDR-Airband
+
+Package: rtl-airband
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: RTL-SDR Airband receiver (custom build)
+ A debian .deb package of RTLSDR-Airband with systemd service.

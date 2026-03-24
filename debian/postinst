@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+   configure)
+       # Create system user "airband" if it doesn't exist
+       if ! id -u airband >/dev/null 2>&1; then
+         adduser --system --group --home /nonexistent --no-create-home airband
+       fi
+
+       # Ensure user "airband" is in plugdev group
+       adduser airband plugdev
+    ;;
+esac
+
+#DEBHELPER#
+
+# The above line is required for debhelper to enable/start
+# systemd service at installation, and run other script snippets
+
+exit 0
